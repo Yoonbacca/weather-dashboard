@@ -39,7 +39,7 @@ formEl.on('submit', searchLocation);
 
 function populateDates() {
     let today = dayjs();
-    for (let i = 1; i < 6; i++) {
+    for (let i = 0; i < 6; i++) {
         let dateIndex = today.add(i, 'day');
         let dateHeader = $('#date-index-'+i).prev().text(dateIndex.format('M/D/YY'));
         let dateDay = $('#date-index-'+i).prev().prev().text(dateIndex.format('dddd'));
