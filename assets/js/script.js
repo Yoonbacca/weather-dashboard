@@ -30,11 +30,10 @@ formEl.on('submit', searchLocation);
 
 function populateDates() {
     let today = dayjs();
-    for (let i = 0; i < 6; i++) {
+    for (let i = 1; i < 6; i++) {
         let dateIndex = today.add(i, 'day');
         let dateHeader = $('#date-index-'+i).prev().text(dateIndex.format('M/D/YY'));
         let dateDay = $('#date-index-'+i).prev().prev().text(dateIndex.format('dddd'));
-        console.log(dateIndex)
     }
 }
 
@@ -97,6 +96,7 @@ function populateDropdown() {
 }
 
 function populateMainCard() {
+    $('#date-index-0').empty();
     const currentSearch = {
         lat: search.lat,
         lon: search.lon,
@@ -110,10 +110,12 @@ function populateMainCard() {
         return response.json();
      })
       .then((data) => {
-        console.log(data);
+        let iconEl = $('<img>').attr('src', 'https://openweathermap.org/img/wn/'+data.weather[0].icon+'.png');
+        let descEl = $('<li>').append(iconEl);
         let tempEl = $('<li>').text('Temp: ' + data.main.temp + "°F");
         let windEl = $('<li>').text('Wind: ' + data.wind.speed + "mph");
         let humidEl = $('<li>').text('Humidity: ' + data.main.humidity + "%");
+        $('#date-index-0').append(iconEl);
         $('#date-index-0').append(tempEl);
         $('#date-index-0').append(windEl);
         $('#date-index-0').append(humidEl);
@@ -136,9 +138,13 @@ function populateForecast() {
       .then((data) => {
         console.log(data.list[1]);
         for (let i=1;i<6;i++) {
+            $('#date-index-'+i).empty();
+            let iconEl = $('<img>').attr('src', 'https://openweathermap.org/img/wn/'+data.list[i].weather[0].icon+'.png');
+            let descEl = $('<li>').append(iconEl);
             let tempEl = $('<li>').text('Temp: ' + data.list[i].main.temp + "°F");
             let windEl = $('<li>').text('Wind: ' + data.list[i].wind.speed + "mph");
             let humidEl = $('<li>').text('Humidity: ' + data.list[i].main.humidity + "%");
+            $('#date-index-'+i).append(descEl);
             $('#date-index-'+i).append(tempEl);
             $('#date-index-'+i).append(windEl);
             $('#date-index-'+i).append(humidEl);
