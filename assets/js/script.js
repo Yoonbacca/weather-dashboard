@@ -14,12 +14,21 @@ let searchEl = $('#searchbar');
 let ulEl = $('#history');
 let mainCard = $('#main-card');
 let searchArray = JSON.parse(localStorage.getItem('searchHistory')) || [];
+console.log(searchArray);
 let search = {
-    lat: 0,
-    lon: 0,
+    lat: 41.8755616,
+    lon: -87.6244212,
     city: "Chicago",
     country: "US"
 };
+
+if (searchArray.length !== 0) {
+    search.lat = searchArray[0].lat;
+    search.lon = searchArray[0].lon;
+    search.city = searchArray[0].city;
+    search.country = searchArray[0].country;
+} 
+
 
 populateDropdown();
 populateMainCard();
