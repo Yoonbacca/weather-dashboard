@@ -51,7 +51,7 @@ function populateDates() {
 function searchLocation(event) {
     event.preventDefault();
     let userInput = searchEl.val();
-    let searchUrl = 'http://api.openweathermap.org/geo/1.0/direct?q='+userInput+'&limit=5&appid=35606312ec0c5f42d4cad1b6cf5889f1';
+    let searchUrl = 'https://api.openweathermap.org/geo/1.0/direct?q='+userInput+'&limit=5&appid=35606312ec0c5f42d4cad1b6cf5889f1';
     fetch(searchUrl)
         .then((response) =>{
             return response.json();
